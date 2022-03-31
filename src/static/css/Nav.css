@@ -1,0 +1,63 @@
+.wrapper{
+    background-color: #ff59d2;
+    background-image: linear-gradient(135deg, #ff59d2 0%, #b318aa 33%, #3f0955 66%, #060550 100%);
+    width: 100vw;
+    height: 100vh;
+}
+.wrapper-head{
+    height: 10vh;
+    background-color: rgb(3, 3, 82);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0 11rem;
+}
+.account-num{
+    font-size: .7rem;
+}
+.account{
+    color: whitesmoke;
+    font-size: .7rem;
+    font-weight: 500;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10rem;
+    font-size: 1.5rem;
+    color: cyan;
+    padding: 1rem;
+}
+
+.header-left{
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 1rem;
+   margin-left: -1rem;
+
+}
+.header-left img{
+    width: 85px;
+    height: 65px;
+}
+a{
+    text-decoration: none;
+    font-size: 1rem;
+    color: cyan;
+    margin: 1rem;
+    font-weight: 600;
+
+}
+.btn-help{
+    background-color: transparent;
+    width: fit-content;
+    border: 2px solid cyan;
+    border-radius: 20px;
+    padding: 0.2rem 2.3rem;
+    font-size: .8rem;
+    color: cyan;
+}

@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import Navbar from './Navbar'
 import Web3 from 'web3'
 import Ballot from '../truffle_abis/Ballot.json'
-import Main from './Main.js'
+import Main from './Main.js';
+import Nav from "./Nav";
 
 class Home extends Component{
     
@@ -97,9 +98,11 @@ class Home extends Component{
         return(
             
 
-            <div >
+            <section className='wrapper'>
                 
-                     <Navbar account = {this.state.account}/>
+                   
+                     <Nav account={this.state.account} a={true}></Nav>
+                     
                    <div className='container-fluid mt-5'>
                         <div className='row'>
                             <main role='main' className='col-lg-12 ml-auto mr-auto' style={{maxWidth : '600px', minHeight : '100vm'}}>
@@ -109,10 +112,10 @@ class Home extends Component{
                         </div>
                         
                     </div> 
+                   </section> 
                     
                     
-                    
-            </div>
+           
             
         )
     }
