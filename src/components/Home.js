@@ -4,9 +4,25 @@ import Web3 from 'web3'
 import Ballot from '../truffle_abis/Ballot.json'
 import Main from './Main.js';
 import Nav from "./Nav";
+import { Moralis } from 'moralis';
+import { useNavigate} from 'react-router-dom';
+const serverUrl = "https://obtz1utqtwxn.usemoralis.com:2053/server";
+const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
+Moralis.start({ serverUrl, appId });
 
-class Home extends Component{
+class Home extends React.Component{
     
+    
+    async logOut() {
+         
+        console.log(Moralis.User.current())
+        await Moralis.User.logOut();
+        console.log(Moralis.User.current())
+        console.log("logged out");
+        const navigate = useNavigate();
+        navigate("/app", { replace: true });
+        
+      }
     async componentWillMount(){
         await this.loadWeb3()
         await this.loadBlockchainData()
@@ -68,7 +84,7 @@ class Home extends Component{
         this.setState({res: res.toString() }) 
       }
 
-      
+
     
     constructor(props){
         super(props)
@@ -82,7 +98,9 @@ class Home extends Component{
             
         }
     }
+    
     render(){
+        
         let content
         {this.state.loading ?
              content= <p id='loader' className='text-center' style={{margin: '30px'}}>Loading...</p> :
@@ -104,11 +122,12 @@ class Home extends Component{
                      <Nav account={this.state.account} a={true}></Nav>
                      
                    <div className='container-fluid mt-5'>
+                       
                         <div className='row'>
                             <main role='main' className='col-lg-12 ml-auto mr-auto' style={{maxWidth : '600px', minHeight : '100vm'}}>
                                 {content}
                             </main>
-
+                            <button onClick={this.logOut} >Logout</button>
                         </div>
                         
                     </div> 
