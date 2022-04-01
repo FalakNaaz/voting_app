@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.js';
 import { useNavigate, Link, Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 //import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
+import Register from './components/Register';
 // ReactDOM.render(
 //     <React.StrictMode>
 //     <MoralisProvider serverUrl="https://obtz1utqtwxn.usemoralis.com:2053/server" appId="BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj">
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App/>}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/register" element={<Register />}></Route>
 
         </Routes>
       </BrowserRouter>

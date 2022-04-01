@@ -1,0 +1,37 @@
+.reg-sec{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.form__label{
+    color: whitesmoke;
+    margin: .5rem;
+
+}
+
+.username, .lastname, .email, .password, .adhar{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+.btn-reg{
+
+    border-radius: 5px;
+    color: rgb(26, 26, 26);
+    background-color: cyan;
+    padding: .6rem 1.3rem;
+
+}
+
+.reg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form__input{
+    background-color: transparent;
+    
+}

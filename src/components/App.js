@@ -2,7 +2,7 @@ import React, { useCallback }  from 'react';
 //import logo from './logo.png';
 import '../static/css/App.css';
 import { useMoralis } from "react-moralis";
-import Home from "./Home.js";
+import Register from "./Register.js";
 import {useHistory, Link, Route, useNavigate} from 'react-router-dom';
 import Logo from '../static/images/bbg.png';
 import Cir from '../static/images/cir.png';
@@ -14,6 +14,7 @@ function App() {
   //const handleOnClick = () => history.push('./Home.js');
   const { authenticate, isAuthenticated, isAuthenticating, user, account, logout } = useMoralis();
   const navigate = useNavigate();
+  
     const login = async () => {
       console.log(isAuthenticated)
       if (!isAuthenticated) {
@@ -36,6 +37,10 @@ function App() {
           });
       }
     }
+    const register = ()=>{
+      navigate("/register", { replace: true });
+
+    }
 
     const logOut = async () => {
       await logout();
@@ -57,14 +62,14 @@ function App() {
         </p>
 
         <button onClick={login} className="btn-login">Login!</button>
+        <button onClick={register} className="btn-login">Register!</button>
       </div>
       <div className='content-right'>
        <img src={Logo}></img>
       </div>
     </div>
       
-  
-      <Link to="./Home.js" className="btn btn-primary">hello</Link> 
+      <button className="btn btn-primary">hello</button> 
        <button onClick={logOut} disabled={isAuthenticating}>Logout</button>
     </section>
   );
