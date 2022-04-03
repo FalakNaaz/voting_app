@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import Home from './components/Home.js';
-import Navbar from './components/Navbar.js';
+import Admin from './components/Admin.js';
 import { useNavigate, Link, Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 //import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
@@ -34,7 +34,7 @@ ReactDOM.render(
           <Route path="/" element={<App/>}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/register" element={<Register />}></Route>
-
+          <Route path="/admin" element={<Admin />}></Route>
         </Routes>
       </BrowserRouter>
     </MoralisProvider>

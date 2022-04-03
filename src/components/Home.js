@@ -12,19 +12,11 @@ Moralis.start({ serverUrl, appId });
 
 class Home extends React.Component {
 
-
     async logOut() {
 
         console.log(Moralis.User.current())
-
-
-       // await Moralis.User.logOut();
-       // console.log("logged out");
-    
-             await Moralis.User.logOut();
-             this.setState({counter:1});
-            
-            
+         await Moralis.User.logOut();
+        this.setState({counter:1});  
             
     }
 
