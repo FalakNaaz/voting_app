@@ -5,6 +5,7 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import Home from './components/Home.js';
 import Navbar from './components/Navbar.js';
+import Profile from './components/Profile.js';
 import { useNavigate, Link, Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 //import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
@@ -34,6 +35,7 @@ ReactDOM.render(
           <Route path="/" element={<App/>}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/profile"element={Profile}></Route>
 
         </Routes>
       </BrowserRouter>

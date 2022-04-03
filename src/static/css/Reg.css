@@ -1,28 +1,49 @@
 .reg-sec{
+    
     display: flex;
-    width: 80%;
+    padding: 3rem;
+    margin: auto;
     align-items: center;
     justify-content: center;
-    margin: auto;
+    width: 30%;
+    height: 100vh;
+    border-radius: 20px;
+    flex-direction: column;
+   
+}
+
+.registration{
+    
+    
+    
+   
 }
 
 .form__label{
-    color: whitesmoke;
-    margin: .5rem;
+    color: black;
+   margin-right: 1rem;
 
 }
-
+.form-body{
+    background-color: white;
+    padding: 2rem 3rem;
+    border-radius: 20px;
+   
+}
 .username, .gender, .email, .password, .adhaar{
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding-bottom: 1rem;
+   
 }
 .btn-reg{
 
     border-radius: 5px;
-    color: rgb(26, 26, 26);
-    background-color: cyan;
+    background-color: #baca60;
+    background-image: linear-gradient(135deg, #96ff59 0%, #9cb318 33%, #a0ca4a 66%, #53cc48 100%);
     padding: .6rem 1.3rem;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 
 }
 
@@ -33,5 +54,6 @@
 }
 .form__input{
     background-color: transparent;
-    
+    border: none;
+    border-bottom: 1px solid gray;   
 }
