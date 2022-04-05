@@ -37,7 +37,7 @@ contract Ballot{
     function vote(uint candidate) public returns(bool success){
         Voter storage sender = voters[msg.sender];
         require(!sender.voted, 'The Voter has already voted');
-        //require(sender.weight != 0, 'The person has no right to vote');
+        require(sender.weight != 0, 'The person has no right to vote');
         sender.vote = candidate;
         sender.voted = true;
         candidates[candidate].voteCount += 1;
@@ -56,5 +56,8 @@ contract Ballot{
     function winningCandidateName() public view returns(bytes32 winningName_){
        
         winningName_ = candidates[winningCandidateIndex()].name;
+    }
+    function getChairpersonAccount() public view return(address acc_){
+        acc = chairperson;
     }
 }

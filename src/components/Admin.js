@@ -10,8 +10,20 @@ class Admin extends React.Component{
         const a = await Moralis.Cloud.run("averageStars")
         console.log(a)
         for(let i = 0; i < a.length; i++){
+            if(!(a[i].get("ethAddress")))
+            continue
             console.log(a[i].get("name"))
-            list.push(<span key={a[i].get("name")}>{a[i].get("name")}</span>)
+            list.push(
+            <div key={a[i].get("ethAddress")}>
+            <span >{a[i].get("ethAddress")}</span>
+            <button onClick=
+            {(event) => {
+                event.preventDefault()
+                this.props.giveAccessToVote(a[i].get("ethAddress"))
+            }}
+            >Give Access to Vote</button><br/>
+            </div>
+            )
         }
         this.setState({ list: list })
         

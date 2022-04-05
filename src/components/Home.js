@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import Navbar from './Navbar'
+import Admin from './Admin'
 import Web3 from 'web3'
 import Ballot from '../truffle_abis/Ballot.json'
 import Main from './Main.js';
 import Nav from "./Nav";
 import { Moralis } from 'moralis';
 import { Navigate } from "react-router-dom";
+import { Button} from 'react-bootstrap';
 const serverUrl = "https://obtz1utqtwxn.usemoralis.com:2053/server";
 const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
@@ -19,6 +20,20 @@ class Home extends React.Component {
         this.setState({counter:1});  
             
     }
+    async buttonClick() {
+        
+        let res = await this.state.ballot.methods.chairperson().call();
+        console.log("res = ",res)
+        console.log("this.state.account = ",this.state.account)
+        if(this.state.account != res){
+            alert('Only Admin Can Access This Page!')
+            return
+        }
+
+
+        
+        this.setState({buttonClicked: true})
+      }
 
     async componentWillMount() {
         await this.loadWeb3()
@@ -39,16 +54,13 @@ class Home extends React.Component {
         const web3 = window.web3
         const account = await web3.eth.getAccounts()
         this.setState({ account: account[0] })
-        //console.log(account,'hey hey')
         const networkId = await web3.eth.net.getId()
-        //console.log(networkId,'Network ID')
-
-        //load tether data
         const ballotData = Ballot.networks[networkId]
         let ballot
         if (ballotData) {
             let temp = []
             ballot = new web3.eth.Contract(Ballot.abi, ballotData.address)
+            
             this.setState({ ballot: ballot })
 
             let l = await this.state.ballot.methods.cLength().call();
@@ -80,6 +92,12 @@ class Home extends React.Component {
         console.log("The winner is: ", res)
         this.setState({ res: res.toString() })
     }
+    giveAccessToVote = async(account) => {
+        this.setState({loading: true})
+        this.state.ballot.methods.giveAccessToVote(account).send({from: this.state.account}).on('transactionHash', (hash) => {
+            this.setState({loading: false})
+        })
+    }
 
 
 
@@ -91,17 +109,21 @@ class Home extends React.Component {
             res: '0',
             loading: true,
             candidateNames: [],
-            counter: 0
+            counter: 0,
+            buttonClicked: false
 
 
         }
 
         this.logOut = this.logOut.bind(this);
+        this.buttonClick = this.buttonClick.bind(this);
     }
 
     render() {
-        let content
+        
+        let content,adminPage
         {
+           
             this.state.loading ?
             content = <p id='loader' className='text-center' style={{ margin: '30px' }}>Loading...</p> :
             content =
@@ -114,7 +136,11 @@ class Home extends React.Component {
                 counter={this.state.counter}
 
             />
+            
         }
+        
+        this.state.buttonClicked ? content = <Admin giveAccessToVote = {this.giveAccessToVote} /> : content = content
+            
         return (
 
 
@@ -134,6 +160,8 @@ class Home extends React.Component {
                         {this.state.counter && (
                             <Navigate to="/" replace={true} />
                         )}
+                        <Button color="primary" className="px-4" onClick={this.buttonClick}
+              >admin</Button>
                     </div>
 
                 </div>
