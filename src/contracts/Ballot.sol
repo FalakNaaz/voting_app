@@ -54,10 +54,7 @@ contract Ballot{
         }
     }
     function winningCandidateName() public view returns(bytes32 winningName_){
-       
         winningName_ = candidates[winningCandidateIndex()].name;
     }
-    function getChairpersonAccount() public view return(address acc_){
-        acc = chairperson;
-    }
+   
 }
