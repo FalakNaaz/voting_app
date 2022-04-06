@@ -4,6 +4,8 @@ import Web3 from 'web3'
 import Ballot from '../truffle_abis/Ballot.json'
 import Main from './Main.js';
 import Nav from "./Nav";
+
+import PopUpReg from "./PopUpReg";
 import { Moralis } from 'moralis';
 import { Navigate } from "react-router-dom";
 import { Button} from 'react-bootstrap';
@@ -12,6 +14,13 @@ const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
 
 class Home extends React.Component {
+    togglePop = () => {
+        console.log("hello")
+        this.setState({
+            seen: !this.state.seen
+        });
+       
+    };
 
     async logOut() {
 
@@ -110,7 +119,8 @@ class Home extends React.Component {
             loading: true,
             candidateNames: [],
             counter: 0,
-            buttonClicked: false
+            buttonClicked: false,
+            seen: false,
 
 
         }
@@ -156,6 +166,10 @@ class Home extends React.Component {
                             {content}
                         </main>
                         <button onClick={this.logOut} >Logout</button>
+                        <button onClick={() => this.togglePop()}>View Info</button>
+                        {this.state.seen ? (
+                    <PopUpReg toggle={this.togglePop} />
+                ) : null}
 
                         {this.state.counter && (
                             <Navigate to="/" replace={true} />
@@ -166,6 +180,7 @@ class Home extends React.Component {
                 </div>
                 <Button color="primary" className="px-4" onClick={this.buttonClick}
               >admin</Button>
+
             </section>
 
 

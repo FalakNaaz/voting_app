@@ -18,7 +18,6 @@ export default class PopUp extends Component {
             <h3>Register!</h3>
             <label>
               Name:{this.props.address}
-              
             </label>
             <br />
            
