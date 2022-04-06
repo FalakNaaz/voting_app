@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import '../static/css/Styles.css';
+
 
 export default class PopUp extends Component {
   handleClick = () => {
@@ -15,7 +17,7 @@ export default class PopUp extends Component {
           <form>
             <h3>Register!</h3>
             <label>
-              Name:{this.props.val}
+              Name:{this.props.address}
               
             </label>
             <br />

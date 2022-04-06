@@ -26,7 +26,7 @@ class Home extends React.Component {
         console.log("res = ",res)
         console.log("this.state.account = ",this.state.account)
         if(this.state.account != res){
-            alert('Only Admin Can Access This Page!')
+            alert('Only Chairperson Can Access This Page!')
             return
         }
 
@@ -160,11 +160,12 @@ class Home extends React.Component {
                         {this.state.counter && (
                             <Navigate to="/" replace={true} />
                         )}
-                        <Button color="primary" className="px-4" onClick={this.buttonClick}
-              >admin</Button>
+                        
                     </div>
-
+                    
                 </div>
+                <Button color="primary" className="px-4" onClick={this.buttonClick}
+              >admin</Button>
             </section>
 
 

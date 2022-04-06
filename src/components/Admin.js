@@ -8,16 +8,21 @@ const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
 
 class Admin extends React.Component {
-    togglePop = () => {
+    togglePop = (add) => {
+        console.log("hello")
         this.setState({
             seen: !this.state.seen
+        });
+        this.setState({
+           ethAddress: add
         });
     };
 
     async componentWillMount() {
         const list = []
         const a = await Moralis.Cloud.run("averageStars")
-        console.log(a)
+        this.setState({a:a})
+        console.log("this is the list of users",a)
         for (let i = 0; i < a.length; i++) {
             if (!(a[i].get("ethAddress")))
                 continue
@@ -34,7 +39,7 @@ class Admin extends React.Component {
                         }}
                     >Give Access to Vote</button><br />
 
-                    <button onClick={this.togglePop}>View Info</button>
+                    <button onClick={() => this.togglePop(a[i].get("ethAddress"))}>View Info</button>
 
 
                 </div>
@@ -48,7 +53,8 @@ class Admin extends React.Component {
         this.state = {
             list: [],
             seen: false,
-            name: ""
+            name: "",
+            ethAddress: ""
 
         }
     }
@@ -58,8 +64,9 @@ class Admin extends React.Component {
         return (
             <div>
                 {this.state.list}
+                
                 {this.state.seen ? (
-                    <PopUp toggle={this.togglePop} val={this.state.name} />
+                    <PopUp toggle={this.togglePop} address={this.state.ethAddress}/>
                 ) : null}
             </div>
         )
