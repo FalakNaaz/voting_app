@@ -33,7 +33,7 @@ function App() {
 
   return (
     <section className='wrapper'>
-     <Nav a1="Contact Us"></Nav>
+     <Nav a1="Get Started" a2="Home" a3="About Us" a4="Notices"></Nav>
     
 
     <div className='main-content'>
@@ -46,7 +46,7 @@ function App() {
         </p>
 
         <button onClick={login} className="btn-login">Login!</button>
-        <button onClick={register} className="btn-login">Register!</button>
+       
       </div>
       <div className='content-right'>
        <img src={Logo}></img>

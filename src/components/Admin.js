@@ -8,14 +8,18 @@ const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
 
 class Admin extends React.Component {
-    togglePop = (add) => {
+    togglePop = (add,na) => {
+console.log("na::"+na);
+console.log("na::"+add);
+        this.setState({
+            ethAddress: add,
+            uname:na
+         });
         console.log("hello")
         this.setState({
             seen: !this.state.seen
         });
-        this.setState({
-           ethAddress: add
-        });
+        
     };
 
     async componentWillMount() {
@@ -26,9 +30,6 @@ class Admin extends React.Component {
         for (let i = 0; i < a.length; i++) {
             if (!(a[i].get("ethAddress")))
                 continue
-            console.log(a[i].get("name"))
-            let v = a[i].get("name");
-            this.setState({ name: v });
             list.push(
                 <div key={a[i].get("ethAddress")}>
                     <span >{a[i].get("ethAddress")}</span>
@@ -39,7 +40,7 @@ class Admin extends React.Component {
                         }}
                     >Give Access to Vote</button><br />
 
-                    <button onClick={() => this.togglePop(a[i].get("ethAddress"))}>View Info</button>
+                    <button onClick={() => this.togglePop(a[i].get("ethAddress"), a[i].get("name"))}>View Info</button>
 
 
                 </div>
@@ -53,7 +54,7 @@ class Admin extends React.Component {
         this.state = {
             list: [],
             seen: false,
-            name: "",
+            uname: "",
             ethAddress: ""
 
         }
@@ -66,7 +67,7 @@ class Admin extends React.Component {
                 {this.state.list}
                 
                 {this.state.seen ? (
-                    <PopUp toggle={this.togglePop} address={this.state.ethAddress}/>
+                    <PopUp toggle={this.togglePop} address={this.state.ethAddress} name={this.state.uname}/>
                 ) : null}
             </div>
         )

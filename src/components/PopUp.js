@@ -6,7 +6,6 @@ export default class PopUp extends Component {
   handleClick = () => {
     this.props.toggle();
   };
-
   render() {
     return (
       <div className="modal">
@@ -18,6 +17,7 @@ export default class PopUp extends Component {
             <h3>Register!</h3>
             <label>
               Name:{this.props.address}
+              Name:{this.props.name}
             </label>
             <br />
            

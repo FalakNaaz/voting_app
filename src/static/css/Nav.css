@@ -52,6 +52,13 @@ a{
     font-weight: 600;
 
 }
+a:hover{
+    text-decoration: none;
+    font-size: 1rem;
+    color: rgb(215, 244, 244);
+    margin: 1rem;
+    font-weight: 600;
+}
 .btn-help{
     background-color: transparent;
     width: fit-content;
@@ -60,4 +67,38 @@ a{
     padding: 0.2rem 2.3rem;
     font-size: .8rem;
     color: cyan;
+    margin: .5rem;
+}
+.btn-help:hover{
+    background-color: rgb(85, 0, 96);
+    width: fit-content;
+    border: 2px solid cyan;
+    border-radius: 20px;
+    padding: 0.2rem 2.3rem;
+    font-size: .8rem;
+    color: rgb(255, 255, 255);
+    margin: .5rem;
+    border: none;
+    
+}
+
+
+.btn-h{
+    background-color: transparent;
+    width: fit-content;
+    font-size: 1rem;
+    color: cyan;
+    border: none;
+    margin: .5rem;
+    font-weight: 600;
+    
+}
+.btn-h:hover{
+    background-color: transparent;
+    width: fit-content;
+    border: none;
+    font-size: 1rem;
+    color: cyan;
+    font-weight: 600;
+   
 }

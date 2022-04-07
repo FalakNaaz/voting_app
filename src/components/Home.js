@@ -22,6 +22,14 @@ class Home extends React.Component {
        
     };
 
+    togglePopReg = () => {
+        console.log("hello")
+        this.setState({
+            seenReg: !this.state.seenReg
+        });
+       
+    };
+
     async logOut() {
 
         console.log(Moralis.User.current())
@@ -121,6 +129,7 @@ class Home extends React.Component {
             counter: 0,
             buttonClicked: false,
             seen: false,
+            seenReg:false
 
 
         }
@@ -157,7 +166,27 @@ class Home extends React.Component {
             <section className='wrapper'>
 
 
-                <Nav account={this.state.account} a={true}></Nav>
+<div>
+        <div className="wrapper-head">
+
+            <p className="account">ACCOUNT NUMBER: <span className="account-num">{this.state.account}</span></p>
+
+        </div>
+        <header>
+
+            <div className='header-left'>
+                {/*<img src={Cir} className="cir"/>*/}
+                <p>VOTING SYSTEM</p>
+            </div>
+            <div className='header-right'>
+                <a href=''>Home</a>
+                <a href=''>Statics</a>
+                <button className='btn-h' onClick={this.buttonClick}>Admin</button>
+                <button onClick={() => this.togglePopReg()}  className='btn-h' >Profile</button>
+                <button onClick={this.logOut} className='btn-h'>Logout</button>
+            </div>
+        </header>
+    </div>
 
                 <div className='container-fluid mt-5'>
 
@@ -165,10 +194,10 @@ class Home extends React.Component {
                         <main role='main' className='col-lg-12 ml-auto mr-auto' style={{ maxWidth: '600px', minHeight: '100vm' }}>
                             {content}
                         </main>
-                        <button onClick={this.logOut} >Logout</button>
-                        <button onClick={() => this.togglePop()}>View Info</button>
-                        {this.state.seen ? (
-                    <PopUpReg toggle={this.togglePop} />
+                        
+                     
+                        {this.state.seenReg ? (
+                    <PopUpReg toggle={this.togglePopReg} />
                 ) : null}
 
                         {this.state.counter && (
@@ -178,8 +207,7 @@ class Home extends React.Component {
                     </div>
                     
                 </div>
-                <Button color="primary" className="px-4" onClick={this.buttonClick}
-              >admin</Button>
+               
 
             </section>
 
