@@ -60,8 +60,8 @@ export default class PopUpReg extends Component {
     console.log(user.get("name"));
 
   }
-  handleSubmit(event) {
-    this.auth()
+ handleSubmit(event) {
+ this.auth()
 
     // alert('Email is: ' + this.state.email);
     // alert('Adhaar is: ' + this.state.adhaar);
@@ -69,7 +69,9 @@ export default class PopUpReg extends Component {
     // alert('Name is: ' + this.state.name);
     // alert('Address is: ' + this.state.address);
     // alert('Region:' + this.state.region);
+    
     event.preventDefault();
+    
   }
 
   render() {
@@ -80,7 +82,7 @@ export default class PopUpReg extends Component {
             &times;
           </span>
           <form onSubmit={this.handleSubmit}>
-        <div className='wrapper'>
+       
 
 
           <div className='reg-sec'>
@@ -129,9 +131,6 @@ export default class PopUpReg extends Component {
             </div>
            
           </div>
-
-
-        </div>
       </form>
         </div>
       </div>

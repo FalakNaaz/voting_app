@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Web3 from 'web3';
-import tether from '../tether.png'
+import tether from '../tether.png';
+import '../static/css/Utils.css'
 class Main extends Component{
     render(){
         //console.log(this.props.tetherBalance)
@@ -8,8 +9,8 @@ class Main extends Component{
             <div id='content' className='mt-3'>
                 <table className='table text-muted text-center'>
                     <thead>
-                        <tr style={{color: 'black'}}>
-                            <th scope='col'>Voting Page</th>
+                        <tr style={{color: 'cyan'}}>
+                            <th scope='col'>Select the party to vote.</th>
                             {/* <th scope='col'>Reward Balance</th> */}
                         </tr>
                                                 
@@ -20,7 +21,7 @@ class Main extends Component{
                     </tbody>
 
                 </table>
-                <div className='card mb-2' style={{opacity: '0.9'}}>
+                <div className='card mb-2' style={{opacity: '0.9',padding:'1rem'}}>
                     <form
                     onSubmit={(event) => {
                         event.preventDefault()
@@ -48,7 +49,7 @@ class Main extends Component{
                             </div>
                             
                             </div>
-                            <button type='submit' className='btn btn-primary btn-lg btn-block'>Vote</button>
+                            <button type='submit' className='vote'>Vote</button>
                         </div>
 
                     </form>
@@ -59,7 +60,8 @@ class Main extends Component{
                         event.preventDefault()
                         this.props.winningCandidateName()
                     }}
-                    className='btn btn-primary btn-lg btn-block'>Result</button>
+                    className='vote'
+                    >Result</button>
                 </div>
 
             </div>

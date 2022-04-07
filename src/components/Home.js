@@ -4,11 +4,12 @@ import Web3 from 'web3'
 import Ballot from '../truffle_abis/Ballot.json'
 import Main from './Main.js';
 import Nav from "./Nav";
-
+import '../static/css/Utils.css';
+import ba from '../static/images/OIP.jpeg';
 import PopUpReg from "./PopUpReg";
 import { Moralis } from 'moralis';
 import { Navigate } from "react-router-dom";
-import { Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 const serverUrl = "https://obtz1utqtwxn.usemoralis.com:2053/server";
 const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
@@ -19,7 +20,7 @@ class Home extends React.Component {
         this.setState({
             seen: !this.state.seen
         });
-       
+
     };
 
     togglePopReg = () => {
@@ -27,30 +28,30 @@ class Home extends React.Component {
         this.setState({
             seenReg: !this.state.seenReg
         });
-       
+
     };
 
     async logOut() {
 
         console.log(Moralis.User.current())
-         await Moralis.User.logOut();
-        this.setState({counter:1});  
-            
+        await Moralis.User.logOut();
+        this.setState({ counter: 1 });
+
     }
     async buttonClick() {
-        
+
         let res = await this.state.ballot.methods.chairperson().call();
-        console.log("res = ",res)
-        console.log("this.state.account = ",this.state.account)
-        if(this.state.account != res){
+        console.log("res = ", res)
+        console.log("this.state.account = ", this.state.account)
+        if (this.state.account != res) {
             alert('Only Chairperson Can Access This Page!')
             return
         }
 
 
-        
-        this.setState({buttonClicked: true})
-      }
+
+        this.setState({ buttonClicked: true })
+    }
 
     async componentWillMount() {
         await this.loadWeb3()
@@ -77,7 +78,7 @@ class Home extends React.Component {
         if (ballotData) {
             let temp = []
             ballot = new web3.eth.Contract(Ballot.abi, ballotData.address)
-            
+
             this.setState({ ballot: ballot })
 
             let l = await this.state.ballot.methods.cLength().call();
@@ -109,10 +110,10 @@ class Home extends React.Component {
         console.log("The winner is: ", res)
         this.setState({ res: res.toString() })
     }
-    giveAccessToVote = async(account) => {
-        this.setState({loading: true})
-        this.state.ballot.methods.giveAccessToVote(account).send({from: this.state.account}).on('transactionHash', (hash) => {
-            this.setState({loading: false})
+    giveAccessToVote = async (account) => {
+        this.setState({ loading: true })
+        this.state.ballot.methods.giveAccessToVote(account).send({ from: this.state.account }).on('transactionHash', (hash) => {
+            this.setState({ loading: false })
         })
     }
 
@@ -129,7 +130,7 @@ class Home extends React.Component {
             counter: 0,
             buttonClicked: false,
             seen: false,
-            seenReg:false
+            seenReg: false
 
 
         }
@@ -139,75 +140,75 @@ class Home extends React.Component {
     }
 
     render() {
-        
-        let content,adminPage
-        {
-           
-            this.state.loading ?
-            content = <p id='loader' className='text-center' style={{ margin: '30px' }}>Loading...</p> :
-            content =
-            <Main
-                res={this.state.res}
-                voteFunction={this.voteFunction}
-                winningCandidateName={this.winningCandidateName}
-                candidateNames={this.state.candidateNames}
-                //ballot = {this.state.ballot}
-                counter={this.state.counter}
 
-            />
-            
+        let content, adminPage
+        {
+
+            this.state.loading ?
+                content = <p id='loader' className='text-center' style={{ margin: '30px' }}>Loading...</p> :
+                content =
+                <Main
+                    res={this.state.res}
+                    voteFunction={this.voteFunction}
+                    winningCandidateName={this.winningCandidateName}
+                    candidateNames={this.state.candidateNames}
+                    //ballot = {this.state.ballot}
+                    counter={this.state.counter}
+
+                />
+
         }
-        
-        this.state.buttonClicked ? content = <Admin giveAccessToVote = {this.giveAccessToVote} /> : content = content
-            
+
+        this.state.buttonClicked ? content = <Admin giveAccessToVote={this.giveAccessToVote} /> : content = content
+
         return (
 
 
             <section className='wrapper'>
 
 
-<div>
-        <div className="wrapper-head">
+                <div>
+                    <div className="wrapper-head">
 
-            <p className="account">ACCOUNT NUMBER: <span className="account-num">{this.state.account}</span></p>
+                        <p className="account">ACCOUNT NUMBER: <span className="account-num">{this.state.account}</span></p>
 
-        </div>
-        <header>
+                    </div>
+                    <header>
 
-            <div className='header-left'>
-                {/*<img src={Cir} className="cir"/>*/}
-                <p>VOTING SYSTEM</p>
-            </div>
-            <div className='header-right'>
-                <a href=''>Home</a>
-                <a href=''>Statics</a>
-                <button className='btn-h' onClick={this.buttonClick}>Admin</button>
-                <button onClick={() => this.togglePopReg()}  className='btn-h' >Profile</button>
-                <button onClick={this.logOut} className='btn-h'>Logout</button>
-            </div>
-        </header>
-    </div>
-
+                        <div className='header-left'>
+                            {/*<img src={Cir} className="cir"/>*/}
+                            <p>VOTING SYSTEM</p>
+                        </div>
+                        <div className='header-right'>
+                            <a href=''>Home</a>
+                            <a href=''>Statics</a>
+                            <button className='btn-h' onClick={this.buttonClick}>Admin</button>
+                            <button onClick={() => this.togglePopReg()} className='btn-h' >Profile</button>
+                            <button onClick={this.logOut} className='btn-h'>Logout</button>
+                        </div>
+                    </header>
+                </div>
+            <div className="cont">
                 <div className='container-fluid mt-5'>
 
                     <div className='row'>
-                        <main role='main' className='col-lg-12 ml-auto mr-auto' style={{ maxWidth: '600px', minHeight: '100vm' }}>
+                        <main role='main' className='col-lg-12' style={{ maxWidth: '600px', minHeight: '100vm' }}>
                             {content}
-                        </main>
-                        
-                     
-                        {this.state.seenReg ? (
-                    <PopUpReg toggle={this.togglePopReg} />
-                ) : null}
+                        </main> {this.state.seenReg ? (
+                            <PopUpReg toggle={this.togglePopReg} />
+                        ) : null}
 
                         {this.state.counter && (
                             <Navigate to="/" replace={true} />
                         )}
-                        
+
                     </div>
-                    
+
                 </div>
-               
+                <div>
+                    <img src={ba} className="ballot"/>
+                </div>
+                </div>
 
             </section>
 

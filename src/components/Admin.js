@@ -8,12 +8,16 @@ const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
 
 class Admin extends React.Component {
-    togglePop = (add,na) => {
-console.log("na::"+na);
-console.log("na::"+add);
+    togglePop = (ethaddress,name,gender, email, address, region, adhar) => {
+
         this.setState({
-            ethAddress: add,
-            uname:na
+            ethAddress: ethaddress,
+            uname:name,
+            gender:gender,
+            email:email,
+            address:address,
+            region:region,
+            adhar:adhar
          });
         console.log("hello")
         this.setState({
@@ -40,7 +44,9 @@ console.log("na::"+add);
                         }}
                     >Give Access to Vote</button><br />
 
-                    <button onClick={() => this.togglePop(a[i].get("ethAddress"), a[i].get("name"))}>View Info</button>
+                    <button onClick={() => this.togglePop(a[i].get("ethAddress"), a[i].get("name"),
+                     a[i].get("gender"),  a[i].get("email"),  a[i].get("address"),  a[i].get("region"),  a[i].get("adhar")
+                    )}>View Info</button>
 
 
                 </div>
@@ -55,7 +61,12 @@ console.log("na::"+add);
             list: [],
             seen: false,
             uname: "",
-            ethAddress: ""
+            ethAddress: "",
+            gender:"",
+            email:"",
+            adhar:"",
+            address:"",
+            region:""
 
         }
     }
@@ -67,7 +78,7 @@ console.log("na::"+add);
                 {this.state.list}
                 
                 {this.state.seen ? (
-                    <PopUp toggle={this.togglePop} address={this.state.ethAddress} name={this.state.uname}/>
+                    <PopUp toggle={this.togglePop} ethaddress={this.state.ethAddress} name={this.state.uname} gender={this.state.gender} email={this.state.email} adhar={this.state.adhar} address={this.state.address} region={this.state.region}/>
                 ) : null}
             </div>
         )
