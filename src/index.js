@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import Home from './components/Home.js';
 import Admin from './components/Admin.js';
 import Profile from './components/Profile.js';
+import Charts from './components/Chart.js';
 import { useNavigate, Link, Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 //import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
@@ -36,7 +37,9 @@ ReactDOM.render(
           <Route path="/home" element={<Home />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/chart"element={<Charts/>}></Route>
           <Route path="/profile"element={Profile}></Route>
+          
 
         </Routes>
       </BrowserRouter>

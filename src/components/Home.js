@@ -6,9 +6,11 @@ import Main from './Main.js';
 import Nav from "./Nav";
 import '../static/css/Utils.css';
 import ba from '../static/images/OIP.jpeg';
+import PopUpChart from "./PopUpChart.js"
+
 import PopUpReg from "./PopUpReg";
 import { Moralis } from 'moralis';
-import { Navigate } from "react-router-dom";
+import { Navigate,Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 const serverUrl = "https://obtz1utqtwxn.usemoralis.com:2053/server";
 const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
@@ -98,8 +100,11 @@ class Home extends React.Component {
 
     }
     voteFunction = (candidate) => {
+        const user = Moralis.User.current()
+        const gender = user.get("gender")
+        const region = user.get("region")
         this.setState({ loading: true })
-        this.state.ballot.methods.vote(candidate).send({ from: this.state.account }).on('transactionHash', (hash) => {
+        this.state.ballot.methods.vote(candidate,gender,region).send({ from: this.state.account }).on('transactionHash', (hash) => {
             this.setState({ loading: false })
         })
     }
@@ -117,7 +122,21 @@ class Home extends React.Component {
         })
     }
 
+    togglePop = async() => {
+        let c = await this.state.ballot.methods.candidates(1).call();
+        
+        //console.log("hello",m,f)
+        this.setState({
+            seen: !this.state.seen,
+            maleCounter: c.maleCount,
+            femaleCounter: c.femaleCount,
+            region1Counter: c.region1Count,
+            region2Counter: c.region2Count,
+            region3Counter: c.region3Count,
 
+        });
+        
+    };
 
     constructor(props) {
         super(props)
@@ -130,8 +149,12 @@ class Home extends React.Component {
             counter: 0,
             buttonClicked: false,
             seen: false,
-            seenReg: false
-
+            maleCounter: 0,
+            femaleCounter: 0,
+            seenReg:false,
+            region1Counter: 0,
+            region2Counter: 0,
+            region3Counter: 0,
 
         }
 
@@ -190,7 +213,7 @@ class Home extends React.Component {
                 </div>
             <div className="cont">
                 <div className='container-fluid mt-5'>
-
+               
                     <div className='row'>
                         <main role='main' className='col-lg-12' style={{ maxWidth: '600px', minHeight: '100vm' }}>
                             {content}
@@ -209,6 +232,13 @@ class Home extends React.Component {
                     <img src={ba} className="ballot"/>
                 </div>
                 </div>
+               
+              
+              <button onClick={() => this.togglePop()}>PopUpChart </button>
+               {this.state.seen ? (
+                    <PopUpChart toggle={this.togglePop} maleCounter={this.state.maleCounter} femaleCounter=  {this.state.femaleCounter} region1Counter= {this.state.region1Counter} region2Counter= {this.state.region2Counter} region3Counter= {this.state.region3Counter}/>
+                ) : null}
+               
 
             </section>
 

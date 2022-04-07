@@ -54,7 +54,7 @@ class Main extends Component{
 
                     </form>
                    
-                    <button
+                     <button
                     type = 'submit'
                     onClick={(event) => {
                         event.preventDefault()

@@ -57,6 +57,7 @@ export default class PopUpReg extends Component {
     user.set("gender", this.state.gender);
     user.set("address", this.state.address);
     user.set("region", this.state.region);
+    user.save()
     console.log(user.get("name"));
 
   }
