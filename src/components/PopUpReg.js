@@ -18,7 +18,7 @@ export default class PopUpReg extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { email: '', adhaar: '', gender: '', name: '', address: '', region: '' };
+    this.state = { email: '', adhaar: '', gender: '', name: '', address: '', region: 'Region1' };
 
 
     this.handleChange = this.handleChange.bind(this);
@@ -117,8 +117,9 @@ export default class PopUpReg extends Component {
               <div className="region">
                 <label className="form__label" for="region">Region </label>
                 <select  onChange={this.setRegion} name="region">
-                  <option value="aligarh">Aligarh</option>
-                  <option  value="marehra">Marehra</option>
+                  <option value="Region1">Region 1</option>
+                  <option  value="Region2">Region 2</option>
+                  <option  value="Region3">Region 3</option>
                 </select>
                
               </div>
