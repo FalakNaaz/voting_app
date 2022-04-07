@@ -17,10 +17,11 @@ function Nav(props) {
                 <p>VOTING SYSTEM</p>
             </div>
             <div className='header-right'>
+                
                 <a href=''>{props.a1}</a>
-                <a href=''>Get Started</a>
-                <a href=''>About Us</a>
-                <a href=''>Notice</a>
+                <a href=''>{props.a2}</a>
+                <a href=''>{props.a3}</a>
+                <a href=''>{props.a4}</a>
                 <button className='btn-help'>Help</button>
             </div>
         </header>

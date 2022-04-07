@@ -5,6 +5,8 @@ import Ballot from '../truffle_abis/Ballot.json'
 import Main from './Main.js';
 import Nav from "./Nav";
 import PopUpChart from "./PopUpChart.js"
+
+import PopUpReg from "./PopUpReg";
 import { Moralis } from 'moralis';
 import { Navigate,Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
@@ -13,6 +15,21 @@ const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
 
 class Home extends React.Component {
+    togglePop = () => {
+        console.log("hello")
+        this.setState({
+            seen: !this.state.seen
+        });
+       
+    };
+
+    togglePopReg = () => {
+        console.log("hello")
+        this.setState({
+            seenReg: !this.state.seenReg
+        });
+       
+    };
 
     async logOut() {
 
@@ -126,7 +143,8 @@ class Home extends React.Component {
             buttonClicked: false,
             seen: false,
             maleCounter: 0,
-            femaleCounter: 0
+            femaleCounter: 0,
+            seenReg:false
 
 
         }
@@ -136,10 +154,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const newTo = { 
-            pathname: "/chart", 
-            param1: "Par1" 
-          };
+        
         let content,adminPage
         {
            
@@ -166,15 +181,39 @@ class Home extends React.Component {
             <section className='wrapper'>
 
 
-                <Nav account={this.state.account} a={true}></Nav>
+<div>
+        <div className="wrapper-head">
+
+            <p className="account">ACCOUNT NUMBER: <span className="account-num">{this.state.account}</span></p>
+
+        </div>
+        <header>
+
+            <div className='header-left'>
+                {/*<img src={Cir} className="cir"/>*/}
+                <p>VOTING SYSTEM</p>
+            </div>
+            <div className='header-right'>
+                <a href=''>Home</a>
+                <a href=''>Statics</a>
+                <button className='btn-h' onClick={this.buttonClick}>Admin</button>
+                <button onClick={() => this.togglePopReg()}  className='btn-h' >Profile</button>
+                <button onClick={this.logOut} className='btn-h'>Logout</button>
+            </div>
+        </header>
+    </div>
 
                 <div className='container-fluid mt-5'>
-                <Link to= {newTo}>Charts</Link>
+               
                     <div className='row'>
                         <main role='main' className='col-lg-12 ml-auto mr-auto' style={{ maxWidth: '600px', minHeight: '100vm' }}>
                             {content}
                         </main>
-                        <button onClick={this.logOut} >Logout</button>
+                        
+                     
+                        {this.state.seenReg ? (
+                    <PopUpReg toggle={this.togglePopReg} />
+                ) : null}
 
                         {this.state.counter && (
                             <Navigate to="/" replace={true} />
@@ -183,13 +222,14 @@ class Home extends React.Component {
                     </div>
                     
                 </div>
-                <Button color="primary" className="px-4" onClick={this.buttonClick}
-              >admin</Button>
+               
               
               <button onClick={() => this.togglePop()}>PopUpChart </button>
                {this.state.seen ? (
                     <PopUpChart toggle={this.togglePop} maleCounter={this.state.maleCounter} femaleCounter=  {this.state.femaleCounter}/>
                 ) : null}
+               
+
             </section>
 
 
