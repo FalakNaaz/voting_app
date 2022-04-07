@@ -100,8 +100,9 @@ class Home extends React.Component {
     voteFunction = (candidate) => {
         const user = Moralis.User.current()
         const gender = user.get("gender")
+        const region = user.get("region")
         this.setState({ loading: true })
-        this.state.ballot.methods.vote(candidate,gender).send({ from: this.state.account }).on('transactionHash', (hash) => {
+        this.state.ballot.methods.vote(candidate,gender,region).send({ from: this.state.account }).on('transactionHash', (hash) => {
             this.setState({ loading: false })
         })
     }
@@ -120,13 +121,17 @@ class Home extends React.Component {
     }
 
     togglePop = async() => {
-        let m = await this.state.ballot.methods.candidates(1).call();
-        let f = await this.state.ballot.methods.candidates(1).call();
+        let c = await this.state.ballot.methods.candidates(1).call();
+        
         //console.log("hello",m,f)
         this.setState({
             seen: !this.state.seen,
-            maleCounter: m.maleCount,
-            femaleCounter: f.femaleCount
+            maleCounter: c.maleCount,
+            femaleCounter: c.femaleCount,
+            region1Counter: c.region1Count,
+            region2Counter: c.region2Count,
+            region3Counter: c.region3Count,
+
         });
         
     };
@@ -144,8 +149,10 @@ class Home extends React.Component {
             seen: false,
             maleCounter: 0,
             femaleCounter: 0,
-            seenReg:false
-
+            seenReg:false,
+            region1Counter: 0,
+            region2Counter: 0,
+            region3Counter: 0,
 
         }
 
@@ -226,7 +233,7 @@ class Home extends React.Component {
               
               <button onClick={() => this.togglePop()}>PopUpChart </button>
                {this.state.seen ? (
-                    <PopUpChart toggle={this.togglePop} maleCounter={this.state.maleCounter} femaleCounter=  {this.state.femaleCounter}/>
+                    <PopUpChart toggle={this.togglePop} maleCounter={this.state.maleCounter} femaleCounter=  {this.state.femaleCounter} region1Counter= {this.state.region1Counter} region2Counter= {this.state.region2Counter} region3Counter= {this.state.region3Counter}/>
                 ) : null}
                
 
