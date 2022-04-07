@@ -4,9 +4,10 @@ import Web3 from 'web3'
 import Ballot from '../truffle_abis/Ballot.json'
 import Main from './Main.js';
 import Nav from "./Nav";
+import PopUpChart from "./PopUpChart.js"
 import { Moralis } from 'moralis';
-import { Navigate } from "react-router-dom";
-import { Button} from 'react-bootstrap';
+import { Navigate,Link } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 const serverUrl = "https://obtz1utqtwxn.usemoralis.com:2053/server";
 const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
@@ -15,7 +16,7 @@ class Home extends React.Component {
 
     async logOut() {
 
-        console.log(Moralis.User.current())
+        //console.log(Moralis.User.current())
          await Moralis.User.logOut();
         this.setState({counter:1});  
             
@@ -80,8 +81,10 @@ class Home extends React.Component {
 
     }
     voteFunction = (candidate) => {
+        const user = Moralis.User.current()
+        const gender = user.get("gender")
         this.setState({ loading: true })
-        this.state.ballot.methods.vote(candidate).send({ from: this.state.account }).on('transactionHash', (hash) => {
+        this.state.ballot.methods.vote(candidate,gender).send({ from: this.state.account }).on('transactionHash', (hash) => {
             this.setState({ loading: false })
         })
     }
@@ -99,7 +102,17 @@ class Home extends React.Component {
         })
     }
 
-
+    togglePop = async() => {
+        let m = await this.state.ballot.methods.candidates(1).call();
+        let f = await this.state.ballot.methods.candidates(1).call();
+        //console.log("hello",m,f)
+        this.setState({
+            seen: !this.state.seen,
+            maleCounter: m.maleCount,
+            femaleCounter: f.femaleCount
+        });
+        
+    };
 
     constructor(props) {
         super(props)
@@ -110,7 +123,10 @@ class Home extends React.Component {
             loading: true,
             candidateNames: [],
             counter: 0,
-            buttonClicked: false
+            buttonClicked: false,
+            seen: false,
+            maleCounter: 0,
+            femaleCounter: 0
 
 
         }
@@ -120,7 +136,10 @@ class Home extends React.Component {
     }
 
     render() {
-        
+        const newTo = { 
+            pathname: "/chart", 
+            param1: "Par1" 
+          };
         let content,adminPage
         {
            
@@ -143,14 +162,14 @@ class Home extends React.Component {
             
         return (
 
-
+            
             <section className='wrapper'>
 
 
                 <Nav account={this.state.account} a={true}></Nav>
 
                 <div className='container-fluid mt-5'>
-
+                <Link to= {newTo}>Charts</Link>
                     <div className='row'>
                         <main role='main' className='col-lg-12 ml-auto mr-auto' style={{ maxWidth: '600px', minHeight: '100vm' }}>
                             {content}
@@ -166,6 +185,11 @@ class Home extends React.Component {
                 </div>
                 <Button color="primary" className="px-4" onClick={this.buttonClick}
               >admin</Button>
+              
+              <button onClick={() => this.togglePop()}>PopUpChart </button>
+               {this.state.seen ? (
+                    <PopUpChart toggle={this.togglePop} maleCounter={this.state.maleCounter} femaleCounter=  {this.state.femaleCounter}/>
+                ) : null}
             </section>
 
 

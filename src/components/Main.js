@@ -53,13 +53,13 @@ class Main extends Component{
 
                     </form>
                    
-                    <button
+                    {/* <button
                     type = 'submit'
                     onClick={(event) => {
                         event.preventDefault()
                         this.props.winningCandidateName()
                     }}
-                    className='btn btn-primary btn-lg btn-block'>Result</button>
+                    className='btn btn-primary btn-lg btn-block'>Result</button> */}
                 </div>
 
             </div>
