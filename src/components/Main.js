@@ -49,7 +49,7 @@ class Main extends Component{
                             </div>
                             
                             </div>
-                            <button type='submit' className='vote'>Vote</button>
+                            <button type='submit' className='vote' >Vote</button>
                         </div>
 
                     </form>
@@ -57,10 +57,12 @@ class Main extends Component{
                      <button
                     type = 'submit'
                     onClick={(event) => {
+                
                         event.preventDefault()
                         this.props.winningCandidateName()
                     }}
                     className='vote'
+                    disabled = {!this.props.disable}
                     >Result</button>
                 </div>
 

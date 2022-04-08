@@ -42,7 +42,7 @@ function App() {
         <h2>System</h2>
         <hr></hr>
         <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit donec et luctus quam. Cras vel viverra ligula. Fusce hendrerit lorem risus, non convallis.
+        A Quick, Smart and Secure way to cast your vote. No need to hustle to the polling booth to cast your vote. Just use your smartphone/computer and cast your vote from anywhere in a secure way.
         </p>
 
         <button onClick={login} className="btn-login">Login!</button>

@@ -61,6 +61,12 @@ class Admin extends React.Component {
         this.setState({ list: list })
 
     }
+    handleClick() {
+        this.setState({
+            status: !this.state.status,
+            switchButton: !this.state.status ? 'ON' : 'OFF'
+        })
+    }
     constructor(props) {
         super(props)
         this.state = {
@@ -72,7 +78,9 @@ class Admin extends React.Component {
             email:"",
             adhar:"",
             address:"",
-            region:""
+            region:"",
+            status: false,
+            switchButton: "Off"
 
         }
     }
@@ -81,6 +89,9 @@ class Admin extends React.Component {
 
         return (
             <div>
+                <button onClick={()=> this.handleClick()}>
+                {this.state.switchButton}
+            </button>
                  <div className='reg-sec'>
                 <div className="form-body">
                 {this.state.list}

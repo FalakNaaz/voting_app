@@ -11,7 +11,7 @@ const appId = "BU9h9ioUi5crW9o8GDCqwHlAQTKA2lR7LCBTZKEj";
 Moralis.start({ serverUrl, appId });
 
 
-export default class PopUpReg extends Component {
+export default class PopUpReg extends React.Component {
   handleClick = () => {
     this.props.toggle();
   };
@@ -46,10 +46,10 @@ export default class PopUpReg extends Component {
     this.setState({region:event.target.value});
     console.log(event.target.value);
   }
-  async auth() {
-    await Moralis.authenticate();
+   auth() {
+    //await Moralis.authenticate();
     const user = Moralis.User.current();
-    console.log(user);
+    console.log("user is", user);
     //user.set("nickname", "arifa")
     user.set("name", this.state.name);
     user.set("email", this.state.email);
@@ -58,6 +58,7 @@ export default class PopUpReg extends Component {
     user.set("address", this.state.address);
     user.set("region", this.state.region);
     user.save()
+    alert('Profile details has been successfully submitted!')
     console.log(user.get("name"));
 
   }
@@ -76,6 +77,8 @@ export default class PopUpReg extends Component {
   }
 
   render() {
+    let user = Moralis.User.current();
+    console.log("user is",user)
     return (
       <div className="modal">
         <div className="modal_content">

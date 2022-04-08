@@ -43,14 +43,10 @@ class Home extends React.Component {
     async buttonClick() {
 
         let res = await this.state.ballot.methods.chairperson().call();
-        console.log("res = ", res)
-        console.log("this.state.account = ", this.state.account)
         if (this.state.account != res) {
             alert('Only Chairperson Can Access This Page!')
             return
         }
-
-
 
         this.setState({ buttonClicked: true })
     }
@@ -155,11 +151,25 @@ class Home extends React.Component {
             region1Counter: 0,
             region2Counter: 0,
             region3Counter: 0,
+            status: false,
+            switchButton: "Off"
+
 
         }
 
         this.logOut = this.logOut.bind(this);
         this.buttonClick = this.buttonClick.bind(this);
+    }
+    async handleClick() {
+        let res = await this.state.ballot.methods.chairperson().call();
+        if (this.state.account != res) {
+            alert('Only Chairperson Can Access This Page!')
+            return
+        }
+        this.setState({
+            status: !this.state.status,
+            switchButton: !this.state.status ? 'ON' : 'OFF'
+        })
     }
 
     render() {
@@ -177,6 +187,7 @@ class Home extends React.Component {
                     candidateNames={this.state.candidateNames}
                     //ballot = {this.state.ballot}
                     counter={this.state.counter}
+                    disable = {this.state.status}
 
                 />
 
@@ -204,10 +215,13 @@ class Home extends React.Component {
                         </div>
                         <div className='header-right'>
                             <a href=''>Home</a>
-                            <a href=''>Statics</a>
+                            <button onClick={() => this.togglePop() }className='btn-h'>Statistics </button>
                             <button className='btn-h' onClick={this.buttonClick}>Admin</button>
                             <button onClick={() => this.togglePopReg()} className='btn-h' >Profile</button>
                             <button onClick={this.logOut} className='btn-h'>Logout</button>
+                            <button onClick={()=> this.handleClick()} className='btn-h'>
+                {this.state.switchButton}
+            </button>
                         </div>
                     </header>
                 </div>
@@ -234,7 +248,7 @@ class Home extends React.Component {
                 </div>
                
               
-              <button onClick={() => this.togglePop()}>PopUpChart </button>
+              
                {this.state.seen ? (
                     <PopUpChart toggle={this.togglePop} maleCounter={this.state.maleCounter} femaleCounter=  {this.state.femaleCounter} region1Counter= {this.state.region1Counter} region2Counter= {this.state.region2Counter} region3Counter= {this.state.region3Counter}/>
                 ) : null}
