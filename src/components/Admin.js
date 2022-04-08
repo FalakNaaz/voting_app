@@ -36,17 +36,23 @@ class Admin extends React.Component {
                 continue
             list.push(
                 <div key={a[i].get("ethAddress")}>
-                    <span >{a[i].get("ethAddress")}</span>
+                 
+
+
+
+                   <span><b><span style={{color:'blue'}}>{(i+1)+":"}</span></b><b> {a[i].get("ethAddress")}</b></span>
                     <button onClick=
                         {(event) => {
                             event.preventDefault()
                             this.props.giveAccessToVote(a[i].get("ethAddress"))
                         }}
-                    >Give Access to Vote</button><br />
+                        className="access-btn"
+                    >Give Access to Vote</button>
 
-                    <button onClick={() => this.togglePop(a[i].get("ethAddress"), a[i].get("name"),
+                    <button className="access-btn" onClick={() => this.togglePop(a[i].get("ethAddress"), a[i].get("name"),
                      a[i].get("gender"),  a[i].get("email"),  a[i].get("address"),  a[i].get("region"),  a[i].get("adhar")
-                    )}>View Info</button>
+                    )} style={{backgroundColor:'#143cdeb3'}}>View Info</button>
+                    <br/><br/>
 
 
                 </div>
@@ -75,11 +81,15 @@ class Admin extends React.Component {
 
         return (
             <div>
+                 <div className='reg-sec'>
+                <div className="form-body">
                 {this.state.list}
                 
                 {this.state.seen ? (
                     <PopUp toggle={this.togglePop} ethaddress={this.state.ethAddress} name={this.state.uname} gender={this.state.gender} email={this.state.email} adhar={this.state.adhar} address={this.state.address} region={this.state.region}/>
                 ) : null}
+            </div>
+            </div>
             </div>
         )
     }

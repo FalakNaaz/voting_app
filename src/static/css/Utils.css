@@ -1,6 +1,6 @@
 .cont{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
     flex-direction: row;
     margin: auto;
@@ -12,6 +12,7 @@
     box-shadow: 1px -1px 14px 13px rgba(161,161,161,0.77);
 -webkit-box-shadow: 1px -1px 14px 13px rgba(161,161,161,0.77);
 -moz-box-shadow: 1px -1px 14px 13px rgba(161,161,161,0.77);
+margin-top: 45%;
 }
 
 .vote{
@@ -23,4 +24,7 @@
     background-color: #ff59d2;
     background-image: linear-gradient(135deg, #ff59d2 0%, #b318aa 33%, #3f0955 66%, #060550 100%);
  
+}
+.ba{
+   
 }

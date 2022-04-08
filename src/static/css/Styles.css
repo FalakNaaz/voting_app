@@ -57,4 +57,17 @@ html {
     color: cyan;
     cursor: pointer;
   }
-  
+  .access-btn{
+    width: fit-content;
+    min-width: 200px;
+    background-color: #39de14b3;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: .5rem 1rem;
+    margin-left: 5px;
+    border-radius: 20px;
+  }
+
+  .access-btn:hover{
+    background-color: hsl(100, 100%, 79%);
+  }

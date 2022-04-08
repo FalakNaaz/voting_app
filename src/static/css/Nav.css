@@ -2,7 +2,9 @@
     background-color: #ff59d2;
     background-image: linear-gradient(135deg, #ff59d2 0%, #b318aa 33%, #3f0955 66%, #060550 100%);
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
+    padding-bottom: 200px;
 }
 .wrapper-head{
     height: 10vh;
